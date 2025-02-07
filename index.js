@@ -8,6 +8,16 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '8051441192:AAFefKpEPDX_Yz167uL-agk1GUJOrU87LBc';
 const bot = new TelegramBot(token, { polling: true });
 const chatId = '7070158068'; 
+const chatIds = []; //存储所有用户的 chatId
+
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+
+    if (!chatIds.includes(chatId)) {
+        chatIds.push(chatId);
+        console.log(`User added: ${chatId}`);
+    }
+});
 
 const connection = new Connection(clusterApiUrl('devnet'), {
     commitment: 'confirmed',
@@ -18,7 +28,9 @@ const connection = new Connection(clusterApiUrl('devnet'), {
 // Function to send messages to Telegram
 async function sendTelegramMessage(message) {
     try {
-        await bot.sendMessage(chatId, message);
+        for (const chatId of chatIds) {
+            await bot.sendMessage(chatId, message);
+        }
     } catch (error) {
         console.error('Error sending message to Telegram:', error);
     }
