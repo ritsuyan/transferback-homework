@@ -1,7 +1,7 @@
-const { Connection, base58,clusterApiUrl, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction, sendAndConfirmTransaction, Keypair } = require('@solana/web3.js');
+const { Connection,clusterApiUrl, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction, sendAndConfirmTransaction, Keypair } = require('@solana/web3.js');
 const AgentPrivateKey = "nrPDeXiv6TADusNoqLSTJ2ss2S44kwuM7NaMXZuGdteTiBv9bqDw1FX4Zd3XKW9jCdfjMPQcpRZVTsETGYcp4ah";
 const bs58 = require('bs58');
-const from = Keypair.fromSecretKey(bs58.decode(AgentPrivateKey));
+const from = Keypair.fromSecretKey(bs58.default.decode(AgentPrivateKey));
 const TelegramBot = require('node-telegram-bot-api');
 
 // Initialize Telegram bot
